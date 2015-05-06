@@ -1,0 +1,4 @@
+### About jQuery
+
+Each directory folder has the markdown file which expalins each the concepts covered within this chapter *About jQuery*. 
+

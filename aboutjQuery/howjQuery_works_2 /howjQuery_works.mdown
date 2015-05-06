@@ -1,0 +1,31 @@
+###Adding and Removing an HTML Class
+
+Another common task is adding or removing a class.
+
+First, add some style information into the `<head>` of the document, like this:
+
+```css
+<style>
+a.test {
+    font-weight: bold;
+}
+</style>
+```
+All `a` elements are now going to be bold due to the nature of the `addClass()` method which is triggering our style script in the `head`
+
+```javascript 
+$(document).ready(function(){
+  // triggers the class 'test' on our link 
+  // $('a').addClass('test');
+});
+```
+
+Removing the class will take away all the bold links
+
+```javascript
+$(document).ready(function(){
+  // triggers the class 'test' on our link 
+  // $('a').removeClass('test');
+});
+```
+

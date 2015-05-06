@@ -1,0 +1,17 @@
+
+## Special effects
+
+jQuery also provides some handy effects to help you make your web sites stand out. For example, if you create a click handler of:
+
+```javascript
+$(document).ready(function(){
+// click handeler function that has a `hide` method effect attched to our link
+$('a').click(function(){
+  event.preventDefault();
+  $(this).hide('slow');
+  });
+});
+```
+
+When you click the link it should dissapear!
+
