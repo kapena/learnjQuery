@@ -1,0 +1,57 @@
+# On DOM load
+
+## Using slideDown to show elements
+
+```javascript
+// accessing the `.confirmation element and listening to on method which has a click handeler on a button
+$('.confirmation').on('click','button',function() {
+    //  search up through ancestors for the confirmation class then search down through children to find the ticket class
+    $(this).closest('.confirmation').find('.ticket');
+});
+```
+Now we need to use the slideDown method to get our item to slideDown!
+We do this just like this!
+
+```javascript
+$(this).closest('.confirmation').find('.ticket').sideDown();
+```
+But for some odd reason it's not working..We can use a debugging method to fix this issue by calling the `alert()` function on `button` and then call `.length` like so
+
+```javascript
+alert($('button').length);
+```
+In our code
+```javascript
+// calling the alert function on our button and giving it the .length property
+alert($('button').length);
+$('.confirmation').on('click','button',function() {
+    $(this).closest('.confirmation').find('.ticket').slideDown();
+});
+```
+Now when we load the page a pop up alert box will state "The page at file://... says" `0` which means that we are not finding any buttons!
+
+We want it to be `1` that means we have found a button!
+
+The reason why this is accuring is because we have not wrapped our code in the ` document.ready` function! Why don't we do that
+
+```javascript
+$('document').ready(function() {
+    // calling the alert function on our button and giving it the .length property
+    alert($('button').length);
+    $('.confirmation').on('click','button',function() {
+        $(this).closest('.confirmation').find('.ticket').slideDown();
+    });
+});
+```
+Now when we load our page we get `1` which means we did find the button :)
+So now we can remove the `alert()` function.
+
+```javascript
+$('document').ready(function() {
+    // calling the alert function on our button and giving it the .length property
+    // alert($('button').length);
+    $('.confirmation').on('click','button',function() {
+        $(this).closest('.confirmation').find('.ticket').slideDown();
+    });
+});
+```
