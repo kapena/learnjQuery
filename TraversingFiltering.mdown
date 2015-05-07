@@ -55,4 +55,95 @@ $(document).ready(function(){
 });
 ```
 
-## More soon :)
+## Refactoring
+We're using this code twice: `$(this).closest('.tour')` to find the tour element.
+
+Refactor your code so that the closest tour element is set to a variable named tour, and then use that variable instead. This way, we only query the DOM once for the tours, instead of twice.
+
+
+```javascript
+// 3:19
+$(document).ready(function(){
+    $('button').on('click',function(){
+        // We are using the $(this).closest('.tour') twice in the above code which is querying the DOM twice. To avoid querying the DOM twice we store $(this).closest('.tour') inside of a variable
+        var tour = $(this).closest('.tour');
+        var discount = (this).closest('.tour').data('discount');
+        var message = $('<span> Call 1-555-jquery-air for a $ '+discount+' discount </span>');
+        // see here we are using our `tour` varaible and then appending our message!
+        $(this).closest('tour').append(message);
+        $(this).remove();
+    });
+});
+```
+## Better On Handlers
+There is a small problem with the way our on handler is being used. Currently, the handler is targeting all `<button>` elements on the screen.
+
+Refactor the on handler to only target `<button>` elements within a `.tour` by using the selector argument of the on method.
+
+```javascript
+// 3:20
+$(document).ready(function(){
+    // targeting `button` elements only within `.tour` by using the selector argument inside of the on method
+    $('.tour').on('click', 'button',function(){
+        var tour = $(this).closest('.tour');
+        var discount = (this).closest('.tour').data('discount');
+        var message = $('<span> Call 1-555-jquery-air for a $ '+discount+' discount </span>');
+        // see here we are using our `tour` variable and then appending our message!
+        $(this).closest('tour').append(message);
+        $(this).remove();
+    });
+});
+```
+##  New Filter I
+Lets add some result filtering options to our page!
+
+We want to be able to click on a filter and highlight the corresponding tours with a `.highlight` class.
+
+Go ahead and get started by creating the click handler for the On Sale filter. Don't worry about the contents of the click handler function, we'll get it working in the next few challenges.
+
+```javascript
+ // targeting the filters id and assigning it a `on` method which takes a click event on the .on-onsale class.
+$('#filters').on('click','.on-sale',function () {
+    // find all vacations on-sale and then add a class of highlighted
+});
+
+```
+
+## New Filter II
+Lets make these filters work!
+
+In our event handler, find all `.tour` elements and filter for only those that have a class of `.on-sale`.
+
+Add a class of highlight to only these filtered tours on click.
+
+```javascript
+$('#filters').on('click','.on-sale',function () {
+    // find all vacations on-sale and then add a class of highlighted
+    $('.tour').filter('.on-sale').addClass('highlight');
+});
+
+```
+## New Filter III
+There is one thing left to do, we need to remove the `highlight` class immediately after clicking a filter so we are only highlighting the correct elements.
+
+Another filter has been added to make things interesting. In both of these filters, remove the highlight class from anything that has it.
+
+
+```javascript
+// 1st filter
+$('#filters').on('click','.on-sale',function () {
+    // removing class of `highlight` when `featured` is clicked on
+    $('.highlight').removeClass('highlight');
+    // find all tours `on-sale` and then add a class of `highlight` when `on-sale` is clicked on.
+    $('.tour').filter('.on-sale').addClass('highlight');
+});
+
+// 2nd filter  
+$('#filters').on('click','on-sale',function() {
+    // find all tours `featured` and add a class of `highlight` when clicked on
+    $('.tour').filter('.featured').addClass('highlight');
+    /
+    // removing the class of `highlight` on `featured` when sale is clicked on
+    $('.highlight')removeClass('highlight');
+});
+```
