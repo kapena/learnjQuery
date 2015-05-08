@@ -1,5 +1,7 @@
 # On DOM load
 
+Video lesson notes
+
 ## Using slideDown to show elements
 
 ```javascript
@@ -9,13 +11,13 @@ $('.confirmation').on('click','button',function() {
     $(this).closest('.confirmation').find('.ticket');
 });
 ```
-Now we need to use the slideDown method to get our item to slideDown!
+Now we need to use the `slideDown` method to get our item to slideDown!
 We do this just like this!
 
 ```javascript
 $(this).closest('.confirmation').find('.ticket').sideDown();
 ```
-But for some odd reason it's not working..We can use a debugging method to fix this issue by calling the `alert()` function on `button` and then call `.length` like so
+But for some odd reason it's not working..We can use a debugging method to fix this issue by calling the `alert()` function on `button` and then call `.length` like so...
 
 ```javascript
 alert($('button').length);
@@ -35,7 +37,7 @@ We want it to be `1` that means we have found a button!
 The reason why this is accuring is because we have not wrapped our code in the ` document.ready` function! Why don't we do that
 
 ```javascript
-$('document').ready(function() {
+$(document).ready(function() {
     // calling the alert function on our button and giving it the .length property
     alert($('button').length);
     $('.confirmation').on('click','button',function() {
@@ -47,11 +49,62 @@ Now when we load our page we get `1` which means we did find the button :)
 So now we can remove the `alert()` function.
 
 ```javascript
-$('document').ready(function() {
+$(document).ready(function() {
     // calling the alert function on our button and giving it the .length property
     // alert($('button').length);
     $('.confirmation').on('click','button',function() {
         $(this).closest('.confirmation').find('.ticket').slideDown();
+    });
+});
+```
+
+---
+### Exercises
+---
+
+## 4.3 On load 1
+Once the DOM has loaded, alert the number of photos we have available by using the `length` property.
+
+```javascript
+$(document).ready(function(){
+    // alert the number of images on the page
+    alert($('img').length);
+    });
+```
+## 4.4 On Load II
+Once the DOM has loaded, let's add an event handler to watch for a `click` on `button` elements.
+
+Just to make sure this doesn't impact anything else on the page, only watch for `clicks` on `buttons` within the #tour element.
+
+```javascript
+$(document).ready(function(){
+    // an event handeler to watch for a `click` on the `button` elements that have an id of `#tour`
+    $('#tour').on('click','button',function(){
+    });
+});
+```
+
+
+## 4.5 Slide Effect I
+In this new click event handler, show the `.photos` element by querying the DOM for it then calling `slideDown`. This will draw the eye to the photos by adding a little movement.
+
+
+```javascript
+$(document).ready(function(){
+    $('#tour').on('click','button',function(){
+        // all photos slide down we click on the button
+        $('.photos').slideDown();
+    });
+});
+```
+## 4.6 Slide Effect II
+The photos will now be shown, but we have no way of hiding them. Let's change this to use slideToggle so that the photos will be hidden if they click again.
+
+```javascript
+$(document).ready(function(){
+    $('#tour').on('click','button',function(){
+        // when we click on and off our button then our photos will appear and then disappear. 
+        $('.photos').slideToggle();
     });
 });
 ```
