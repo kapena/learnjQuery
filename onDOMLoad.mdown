@@ -103,8 +103,67 @@ The photos will now be shown, but we have no way of hiding them. Let's change th
 ```javascript
 $(document).ready(function(){
     $('#tour').on('click','button',function(){
-        // when we click on and off our button then our photos will appear and then disappear. 
+        // when we click on and off our button then our photos will appear and then disappear.
         $('.photos').slideToggle();
     });
+});
+```
+---
+## Expanding on `on()`
+---
+
+### Video Lesson Notes
+
+## Deciding on an Event
+Mouse events are:
+
+`click` `focusin` `mousedown` `mousemove` `mouseover` `mouseenter`
+`dblclick` `focusout` `mouseup` `mouseout` `mouseleave`
+
+Here we are applying the `mouseenter` event which watches for our mouse when we mouse over the `h3` element inside of the `confirmation` class
+
+```javascript
+$(document).ready(function() {
+    $('.confirmation').on('click','button',function() {
+        $(this).closest('.confirmation').find('.ticket').slideDown();
+    });
+
+    // take note that we are a using mouseenter event instead of click event
+    $('.confirmation').on('mouseenter','h3',function() {
+        $(this).closest('.confirmation').find('.ticket').slideDown();
+    });
+});
+```
+### Duplicated code
+**The code that we have written has some duplication**  
+```javascript
+$(document).ready(function() {
+    $('.confirmation').on('click','button',function() {
+        // See the same code bellow...This is duplication that we don't need
+        $(this).closest('.confirmation').find('.ticket').slideDown();
+    });
+
+    $('.confirmation').on('mouseenter','h3',function() {
+        // duplicated from above
+        $(this).closest('.confirmation').find('.ticket').slideDown();
+    });
+});
+```
+We can fix this issue by wrapping `$(this).closest('.confirmation').find('.ticket').slideDown();`
+inside of a function and then applying it as our event handeler.
+
+Check the code bellow.
+
+```javascript
+$(document).ready(function () {
+
+    // showTicket becomes the event handler
+    function showTicket() {
+        // finding our elements and applying the slideToggle method to them
+        $(this).closest('.confirmation').find('.ticket').sideToggle();
+    }
+    // We are passing in our `showTicket` function which is storing our code for showing the ticket to the user
+    $('.confirmation').on('mouseenter','button',showTicket);
+    $('.confirmation').on('mouseenter','h3',showTicket);
 });
 ```
