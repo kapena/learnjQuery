@@ -27,9 +27,39 @@ Here we listen on the `.quantity` class and pass in the keyboard event of `keyup
 $(document).ready(function() {
     // using the keyup event on the `.vacation` class
     $('.vacation').on('keyup','.quantity',function() {
+        // Get the price of the vacation
+
+        // Get the quantity entered
+
+        // Set the total to price * quantity
     });
 });
 ```
 The keyboard events are `keypress`, `keydown`,`keyup`
 
 Form events are `blur`,`select`,`change`,`focus`,`submit`
+
+Inside of our event handeler we want to perform 3 tasks
+
+1. Get the price for the vacation out of the `data` element
+2. Get the quantity entered out of the `input` field
+3. Set the total price to price * quantity
+
+
+```javascript
+$(document).ready(function() {
+    // using the keyup event on the `.vacation` class
+    $('.vacation').on('keyup','.quantity',function() {
+        // finding the price of the vacation
+        // the `+` turns our price into a number.
+        var price = +$(this).closest('.vacation').data('price');
+        // Get the quantity entered
+
+        // Set the total to price * quantity
+    });
+});
+
+```
+**The `data-price` is a string and we want it as a number so we can do some multiplication on it. To convert the string into a number we add a `+` before `$(this)` like so**
+
+`var price = +$(this).closest('.vacation').data('price');`
