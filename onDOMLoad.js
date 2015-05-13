@@ -39,3 +39,77 @@ $(document).ready(function(){
         $('.photos').slideToggle();
     });
 });
+
+// 4.8
+
+// Write an event handler that watches for `mouseenter` on any `li` elements within our `.photos` elements and runs an empty function.
+
+$(document).ready(function(){
+
+// event handler watching for mouseenter on any `li` elements
+    $('.photos').on('mouseenter','li',function(){
+    });
+
+    $('#tour').on('click','button',function(){
+        $('.photos').slideToggle();
+    });
+});
+
+// 4.9
+// In our new `mouseenter` event handler, call `slideToggle` on the span tag within the picture description.
+
+$(document).ready(function(){
+
+    // event handler watching for mouseenter on any `li` elements
+    $('.photos').on('mouseenter','li',function(){
+        // traversing down the DOM and finding the span element at which I  call the slideToggle method on.
+        $(this).closest('li').find('span').slideToggle;
+    });
+
+    $('#tour').on('click','button',function(){
+        $('.photos').slideToggle();
+    });
+});
+
+// 4.10
+// Write another event handler that targets the same elements, but calls slideToggle only on the mouseleave event.
+
+$(document).ready(function(){
+
+    $('#tour').on('click','button',function(){
+        $('.photos').slideToggle();
+    });
+
+    // event handler watching for `mouseenter` on any `li` elements
+    $('.photos').on('mouseenter','li',function(){
+        // traversing down the DOM and finding the span element at which I then call the slideToggle method on.
+        $(this).find('span').slideToggle;
+    });
+
+    // event handeler watching for `mouseleave` on any `li` elements
+
+    $('.photos').on('mouseleave','li',function(){
+        // traversing down the DOM and finding the span element at which I then call the slideToggle method on.
+        $(this).find('span').slideToggle();
+    });
+});
+
+
+// 4.11 Named functions
+$(document).ready(function(){
+    $('#tour').on('click','button',function(){
+        $('.photos').slideToggle();
+    });
+
+function showPhotos () {
+    $(this).find('.span').slideToggle();
+}
+
+// using our function showPhotos to exicute our slideing effect when the mouse hovers over the each of the images.
+
+// see how we are using our showPhotos function to find the span element inside of the on method.
+
+$('.photos').on('mouseenter','li',showPhotos);
+$('.photos').on('mousleave','li',showPhotos);
+
+});
