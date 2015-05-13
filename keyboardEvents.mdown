@@ -43,7 +43,7 @@ Inside of our event handeler we want to perform 3 tasks
 
 1. Get the price for the vacation out of the `data` element
 2. Get the quantity entered out of the `input` field
-3. Set the total price to price * quantity
+3. Set the total price to `price * quantity`
 
 
 ```javascript
@@ -63,3 +63,87 @@ $(document).ready(function() {
 **The `data-price` is a string and we want it as a number so we can do some multiplication on it. To convert the string into a number we add a `+` before `$(this)` like so**
 
 `var price = +$(this).closest('.vacation').data('price');`
+
+Now that we have our `price` we need get the quantity.
+We can do this simply with jQuerys built in `val()` object method
+
+Notice that we are using the `+` operator again to convert the string into a number.
+
+
+```javascript
+$(document).ready(function() {
+    // using the keyup event on the `.vacation` class
+    $('.vacation').on('keyup','.quantity',function() {
+        // finding the price of the vacation
+        // the `+` turns our price from a string into a number
+        var price = +$(this).closest('.vacation').data('price');
+        // getting our quantity entered with the `val()` method
+        var quantity = +$(this).val();
+        // Set the total to price * quantity
+    });
+});
+```
+
+Ok so the last thing we need to get is the total..How might we do this.
+Well we know that we need to take `price` and `quantity` and `*` them together.
+
+We access the `#total` `id` and then use the `text()` method to store the expression `.text(price * quantity);` which will print the total ammount to the `#total` `span` `id`
+
+```javascript
+$(document).ready(function() {
+    // using the keyup event on the `.vacation` class
+    $('.vacation').on('keyup','.quantity',function() {
+        // finding the price of the vacation
+        // the `+` turns our price from a string into a number
+        var price = +$(this).closest('.vacation').data('price');
+        // getting our quantity entered with the `val()` method
+        var quantity = +$(this).val();
+        // Set the total to price * quantity
+         $('#total').text(price * quantity);
+    });
+});
+```
+# Exercises
+
+## 4.13 Keyup Event
+We've made a few changes to our tour page. Now we'll allow travelers to specify how many days they want their vacation to be.
+
+Write an event handler that will fire whenever the value within the `keyup` event is triggered on the `#nights` form field. The function can be empty now, then we'll implement it later.
+
+```javascript
+$(document).ready(function() {
+    $('.tour').on('keyup','#nights',function(){
+        // Get the total number of nights
+    });
+});
+```
+## 4.14 Keyup Event Handler I
+Within our event handler, update the number of nights in the `#nights-count` element to whatever the traveler entered in the `#nights` form field.
+
+```javascript
+$(document).ready(function() {
+    $('.tour').on('keyup','#nights',function(){
+        // Get the total number of nights by updating the `nights-count` element to what the traveler entered
+
+        // finding the `nights-count` id then using the `text()` method
+        // to access the value from value within the form with the
+        // `val()` method.
+        $('#nights-count').text($(this).val());
+
+    });
+});
+```
+I wanna make sure that we understand what is happening here in this code.
+`$('#nights-count').text($(this).val());`
+
+So first things first..we need to remember that we are inside of our event handeler.Now inside our event handeler we are to accessing the `#nights-count` `id` like so `$('#nights-count')`
+
+Then we are chaining the jQuery text method onto `#nights-count` like so `$('#nights-count').text()` this allows us to access the text contents of `#nights-count`
+
+Once we have our text method in place then we need access the value of our form `input` field. We do this by adding the `$(this)` object inside of our text method like so `text($(this))`
+
+By using the `$(this)` it allow us to now have access to the the value from within our form field. We achieve this by using the jQuery helper method `val()` which allows us to get the exact value from within the the input field of our for like so `text($(this).val());`
+
+So heres our code in full. There are a few steps here that are quite importaint so try to understand how this works before you move on.
+
+`$('#nights-count').text($(this).val());`
