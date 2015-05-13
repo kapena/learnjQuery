@@ -245,13 +245,12 @@ $(document).ready(function(){
         $('.photos').slideToggle();
     });
 
+    // see how we are using our function `showPhotos` to execute our sliding effect and find the span element.
     function showPhotos () {
         $(this).find('.span').slideToggle();
     }
 
-    // using our function showPhotos to execute our sliding effect when the mouse hovers over the each of the images.
-
-    // see how we are using our showPhotos function to find the span element inside of the on method.
+    // here we are applying the on method to our `.photos` class. Notice how we passing the function of `showPhotos` as the last argument.
 
     $('.photos').on('mouseenter','li',showPhotos);
     $('.photos').on('mousleave','li',showPhotos);
