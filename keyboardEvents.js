@@ -37,6 +37,28 @@ $(document).ready(function(){
         var nights =+$(this).val();
 
         // multiplying dailyPrice and nights to get the full rate
-        $('#total').text(dailyPrice * nights);    
+        $('#total').text(dailyPrice * nights);
+    });
+});
+
+// 4.16
+// Let's write another event handler for the form field that will be run when the focus event is triggered. When this occurs, set the number of nights to 7.
+
+$(document).ready(function(){
+    $('.tour').on('keyup',function(){
+        $('#nights-count').text($(this).val());
+        // setting a varaible that contains the dailyPrice rate
+        var dailyPrice =+$(this).cloeset('.tour').data('daily-price');
+        // setting a varaible that contains the number of nights
+        // the user wishes to stay
+        var nights =+$(this).val();
+
+        // multiplying dailyPrice and nights to get the full rate
+        $('#total').text(dailyPrice * nights);
+    });
+    // new event handler
+    $('.tour').on('focus',function(){
+        // when focus is fired we set the number of digits to 7
+        $(this).val(7);
     });
 });

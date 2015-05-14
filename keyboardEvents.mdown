@@ -231,3 +231,49 @@ To perform that task we will need to use `+$(this)` and chain on `val()` method 
 Now for our final step..We need to take the values that we have collected and multiply them. To do this we are going to need to access our `#total` element then chain in the `text()` method which will take our two variables and multiply them.
 
 `$('#total').text(dailyPrice * nights);`
+
+
+## 4.16 Another Event Handler
+Let's write another event handler for the form field that will be run when the focus event is triggered. When this occurs, set the number of nights to 7.
+
+### What I need to solve
+We need a whole new event handler for the form field. Our event handler only run when the focus event is fired.
+
+When the focus event is fired we will need to set the number of digits to 7.
+
+Start out with the first task. Create a new event handler.
+
+```javascript
+$('.tour').on('focus',function(){
+    // when focus is fired we set the number of digits to 7
+});
+```
+So we have our event handeler in place. Now the next step is to set the number of digits to `7`
+
+To achieve placing in our lucky number 7 into the input field when the focus event is fired we must trigger the focus event by using the `$(this)` keyword.
+
+Now that we have triggered our event we need to access our the value of the form field. To do this we will use the val() method and pass it our lucky number 7!
+`$(this).val(7)`
+
+```javascript
+$(document).ready(function(){
+    $('.tour').on('keyup',function(){
+        $('#nights-count').text($(this).val());
+        // setting a variable that contains the dailyPrice rate
+        var dailyPrice = +$(this).cloeset('.tour').data('daily-price');
+        // setting a variable that contains the number of nights
+        // the user wishes to stay
+        var nights = +$(this).val();
+
+        // multiplying dailyPrice and nights to get the full rate
+        $('#total').text(dailyPrice * nights);
+    });
+
+    // new event handler with a focus event
+    $('.tour').on('focus',function() {
+        // when the focus event is fired we set
+        // number 7 in the input field.
+        $(this).val(7);
+    });
+});
+```
