@@ -105,6 +105,21 @@ $(document).ready(function() {
 ```
 # Exercises
 
+
+```html
+<div class="tour" data-daily-price="357">
+    <h2>Paris, France Tour</h2>
+    <p>$<span id="total">2,499</span> for <span id="nights-count">7</span> Nights</p>
+    <p>
+    <label for="nights">Number of Nights</label>
+    </p>
+    <p>
+    <input type="number" id="nights" value="7">
+    </p>
+</div>
+```
+
+
 ## 4.13 Keyup Event
 We've made a few changes to our tour page. Now we'll allow travelers to specify how many days they want their vacation to be.
 
@@ -151,15 +166,28 @@ So heres our code in full. There are a few steps here that are quite importaint 
 
 Set the content of the `#total` element to the number the traveler has entered into the form field multiplied by the daily price.
 
+```html
+<div class="tour" data-daily-price="357">
+    <h2>Paris, France Tour</h2>
+    <p>$<span id="total">2,499</span> for <span id="nights-count">7</span> Nights</p>
+    <p>
+    <label for="nights">Number of Nights</label>
+    </p>
+    <p>
+    <input type="number" id="nights" value="7">
+    </p>
+</div>
+```
+
 ```javascript
 $(document).ready(function(){
     $('.tour').on('keyup',function(){
         $('#nights-count').text($(this).val());
         // setting a variable that contains the dailyPrice rate
-        var dailyPrice =+$(this).cloeset('.tour').data('daily-price');
+        var dailyPrice = +$(this).cloeset('.tour').data('daily-price');
         // setting a variable that contains the number of nights
         // the user wishes to stay
-        var nights =+$(this).val();
+        var nights = +$(this).val();
 
         // multiplying dailyPrice and nights to get the full rate
         $('#total').text(dailyPrice * nights);
@@ -195,7 +223,7 @@ Now for the second variable which will store the number of nights
 
 To get the number of nights the user is staying we need to access the **value** of our form field which contains the number of nights that they are staying.
 
-To perform that task we will need to use +$(this) and chain on `val()` method which will access the value of a form field like so
+To perform that task we will need to use `+$(this)` and chain on `val()` method which will access the value of a form field like so
 
 `var nights = +$(this).val();`
 
