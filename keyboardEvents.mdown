@@ -236,10 +236,8 @@ Now for our final step..We need to take the values that we have collected and mu
 ## 4.16 Another Event Handler
 Let's write another event handler for the form field that will be run when the focus event is triggered. When this occurs, set the number of nights to 7.
 
-### What I need to solve
-We need a whole new event handler for the form field. Our event handler only run when the focus event is fired.
-
-When the focus event is fired we will need to set the number of digits to 7.
+### Steps to solve
+We need a whole new event handler for the form field. Our event handler only run when the focus event is fired. When the focus event is fired we will need to set the number of digits to 7.
 
 Start out with the first task. Create a new event handler.
 
