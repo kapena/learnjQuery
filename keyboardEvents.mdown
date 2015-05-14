@@ -133,8 +133,7 @@ $(document).ready(function() {
     });
 });
 ```
-I wanna make sure that we understand what is happening here in this code.
-`$('#nights-count').text($(this).val());`
+I wanna make sure that we understand what is happening here in this code. `$('#nights-count').text($(this).val());`
 
 So first things first..we need to remember that we are inside of our event handeler.Now inside our event handeler we are to accessing the `#nights-count` `id` like so `$('#nights-count')`
 
@@ -147,3 +146,60 @@ By using the `$(this)` it allow us to now have access to the the value from with
 So heres our code in full. There are a few steps here that are quite importaint so try to understand how this works before you move on.
 
 `$('#nights-count').text($(this).val());`
+
+## 4.15 Keyup Event Handler II
+
+Set the content of the `#total` element to the number the traveler has entered into the form field multiplied by the daily price.
+
+```javascript
+$(document).ready(function(){
+    $('.tour').on('keyup',function(){
+        $('#nights-count').text($(this).val());
+        // setting a variable that contains the dailyPrice rate
+        var dailyPrice =+$(this).cloeset('.tour').data('daily-price');
+        // setting a variable that contains the number of nights
+        // the user wishes to stay
+        var nights =+$(this).val();
+
+        // multiplying dailyPrice and nights to get the full rate
+        $('#total').text(dailyPrice * nights);
+    });
+});
+```
+
+I'd like to breakdown what is happening in the code above..
+
+First off we need to understand what we need to do.
+
+The question states clearly that we need to set the **content** of the `#total` element to the *number of nights the user wishes to stay and multiply these nights by the daily price*.
+
+To be able to multiply the number of nights by the daily price rate we need to access each of there values. To access each of the values we must set two variables that will fetch and store each of the values.
+
+
+### First Variable
+
+So first off lets set a variable for the daily price rate which will store our first value.
+
+`var dailyPrice`
+
+Now we need to access the data attribute that will contains the daily price rate and to do that we are going to need to use `+$(this).closest('.tour').data('data-price');` remember in our notes above that `+` converts the string to a number. Well in our `data-price` attribute our price in in a string so we must remember to use `+` to convert strings to numbers!
+
+Inside of `dailyPrice` we are accessing the closest element to `.tour` which is the `data-daily-price` attribute through the `data()` method.
+
+`var dailyPrice = +$(this).closest(".tour").data("daily-price");`
+
+### Second Variable
+
+Now for the second variable which will store the number of nights
+`var nights`
+
+To get the number of nights the user is staying we need to access the **value** of our form field which contains the number of nights that they are staying.
+
+To perform that task we will need to use +$(this) and chain on `val()` method which will access the value of a form field like so
+
+`var nights = +$(this).val();`
+
+### Multiplication
+Now for our final step..We need to take the values that we have collected and multiply them. To do this we are going to need to access our `#total` element then chain in the `text()` method which will take our two variables and multiply them.
+
+`$('#total').text(dailyPrice * nights);`
