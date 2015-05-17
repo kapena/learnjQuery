@@ -1,0 +1,90 @@
+# Link Layover
+
+### Video Notes
+
+Clicking the show comment link will cause the comments to fade in.
+So how do we do that? Here's the solution.
+
+## Preparing for flight
+We want to make sure that our `comments` `ul` is hidden when we load the page. This can be achieved with a simple line of css like so
+
+```css
+.comments{
+    display:none;
+}
+```
+Now that we have our `comments` set to `display:none` we can add the functionality of the click on the show comments link. So when the user clicks on show comments the comments will appear.
+
+We set up the following code which contains our event handler.
+
+```javascript
+$(document).ready(function () {
+    // fetching the vacation class
+    // listening for a click event on the link that has the expand class
+    // run our event handler
+    $('.vacation').on('click','.expand',function () {
+        // find the comments ul
+        // show the comments ul
+    });
+});
+
+```
+Now that we have the event handler ready we need to do two things within it.
+First we need to find the comments ul then second we need to show the comments ul.
+
+Finding the comments ul is going to require some DOM traversing.
+This is nothing new.
+
+```javascript
+$(document).ready(function () {
+    $('.vacation').on('click','.expand',function () {
+        // finding the comments ul and showing it with fadeToggle
+        $(this).closest('.vacation').find('.comments').fadeToggle();
+    });
+});
+```
+Now that we have found the `comments` we need to apply the fadeIn method.
+There are a few fading jQuery object methods to choose from. `.fadeIn() `.fadeOut()` `.fadeToggle()`
+
+In our case we want to use `fadeToggle()` which will ether fade the links in when clicked on and fade them out when clicked on again.
+
+So now when we click on our links we get to see the comments but what if I scroll down the page to click on some of the links towards the bottom..Well interesting enough our page keeps jumping back up. Why is this? Well here's a good explanation.
+
+## How the Browser Handles the Click.
+So here is our link!
+
+```html
+<a href='#' class='expand'>Show comments</a>
+```
+When an event occurs we get a thing called an event bubble. So the click event will start on our link of `.expand` and bubble up to each parent node in the markup to let them know a click event happened. Once our bubble has notified all of the parents then it follows the link `#` and goes directly to the top of the page which is the default behavior.
+
+So we need to find a way to prevent the default browser behavior. The first step towards fixing this issue is to add the `event` object inside of our event handler paramater.
+
+```javascript
+$(document).ready(function () {
+    // the event param into our event handler  
+    $('.vacation').on('click','.expand',function (event) {
+        // stopPropagation event
+        event.stopPropagation();
+        // finding the comments ul and showing it with fadeToggle
+        $(this).closest('.vacation').find('.comments').fadeToggle();
+    });
+});
+```
+`stopPropagation` stops our little annoying bubble from going up to ancestors the DOM. So the `stopPropagination` method keeps our bubble contained.
+
+However `stopPropagation` dose not stop the default behavior of the page jumping up so `stopPropagation` its not our solution.
+
+Instead we need to call `event.preventDefault()` **to prevent the default behavior** of the browser!
+
+```javascript
+$(document).ready(function () {
+    // the event param being passed into our event handler  
+    $('.vacation').on('click','.expand',function (event) {
+        // preventDefault event stopping the default behavior.  
+        event.preventDefault();
+        // finding the comments ul and showing it with fadeToggle
+        $(this).closest('.vacation').find('.comments').fadeToggle();
+    });
+});
+```
