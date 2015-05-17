@@ -154,9 +154,11 @@ So first things first..we need to remember that we are inside of our event hande
 
 Then we are chaining the jQuery text method onto `#nights-count` like so `$('#nights-count').text()` this allows us to access the text contents of `#nights-count`
 
-Once we have our text method in place then we need access the value of our form `input` field. We do this by adding the `$(this)` object inside of our text method like so `text($(this))`
+Once we have our text method in place then we need access the value of our form `input` field. We do this by adding the `$(this)` object inside of our text method like so `text($(this));`
 
-By using the `$(this)` it allow us to now have access to the the value from within our form field. We achieve this by using the jQuery helper method `val()` which allows us to get the exact value from within the the input field of our for like so `text($(this).val());`
+We then chain on the val method `val()` which allows us to get the exact value from within the the input field of our for like so `text($(this).val());`
+
+`$(this)` it allows us to trigger our entire event handler.
 
 So heres our code in full. There are a few steps here that are quite importaint so try to understand how this works before you move on.
 
@@ -210,7 +212,11 @@ So first off lets set a variable for the daily price rate which will store our f
 
 `var dailyPrice`
 
-Now we need to access the data attribute that will contains the daily price rate and to do that we are going to need to use `+$(this).closest('.tour').data('data-price');` remember in our notes above that `+` converts the string to a number. Well in our `data-price` attribute our price in in a string so we must remember to use `+` to convert strings to numbers!
+Now we need to access the data attribute that will contain the daily price rate.
+
+To do that we are going to need to use this code.
+
+`var dailyPrice = +$(this).closest('.tour').data('data-price');` remember in our notes above that `+` converts the string to a number. Well in our `data-price` attribute our price in in a string so we must remember to use `+` to convert strings to numbers!
 
 Inside of `dailyPrice` we are accessing the closest element to `.tour` which is the `data-daily-price` attribute through the `data()` method.
 
@@ -223,21 +229,20 @@ Now for the second variable which will store the number of nights
 
 To get the number of nights the user is staying we need to access the **value** of our form field which contains the number of nights that they are staying.
 
-To perform that task we will need to use `+$(this)` and chain on `val()` method which will access the value of a form field like so
+To perform that task we will need to use `+$(this)` and chain on `val()` method which will access the value of a form field
 
 `var nights = +$(this).val();`
 
 ### Multiplication
-Now for our final step..We need to take the values that we have collected and multiply them. To do this we are going to need to access our `#total` element then chain in the `text()` method which will take our two variables and multiply them.
+Now for our final step..We need to take the values that we have collected and multiply them. To do this we are going to need to access our `#total` element then chain the `text()` method which will take our two variables and multiply them.
 
 `$('#total').text(dailyPrice * nights);`
-
 
 ## 4.16 Another Event Handler
 Let's write another event handler for the form field that will be run when the focus event is triggered. When this occurs, set the number of nights to 7.
 
 ### Steps to solve
-We need a whole new event handler for the form field. Our event handler only run when the focus event is fired. When the focus event is fired we will need to set the number of digits to 7.
+First off we need a whole new event handler for the form field. Our event handler only run when the focus event is fired. Once the focus event is fired we will need to set the number of digits to 7.
 
 Start out with the first task. Create a new event handler.
 
