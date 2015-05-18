@@ -30,10 +30,9 @@ $(document).ready(function () {
 
 ```
 Now that we have the event handler ready we need to do two things within it.
-First we need to find the comments ul then second we need to show the comments ul.
+First we need to find the comments `ul` then second we need to show the comments `ul`.
 
-Finding the comments ul is going to require some DOM traversing.
-This is nothing new.
+Finding the comments `ul` is going to require some DOM traversing.
 
 ```javascript
 $(document).ready(function () {
@@ -44,11 +43,13 @@ $(document).ready(function () {
 });
 ```
 Now that we have found the `comments` we need to apply the fadeIn method.
-There are a few fading jQuery object methods to choose from. `.fadeIn() `.fadeOut()` `.fadeToggle()`
+There are a few fading jQuery object methods to choose from. `.fadeIn()` `.fadeOut()` `.fadeToggle()`
 
-In our case we want to use `fadeToggle()` which will ether fade the links in when clicked on and fade them out when clicked on again.
+In our case we want to use `fadeToggle()` which will fade the links in when clicked on and fade them out when clicked on again.
 
-So now when we click on our links we get to see the comments but what if I scroll down the page to click on some of the links towards the bottom..Well interesting enough our page keeps jumping back up. Why is this? Well here's a good explanation.
+So there seems to be a small issue when we are clicking on our links on the bottom of the page! When we click on a link our entire page skips right up to the top of the web page.
+
+ Why is this? Well here's a good explanation.
 
 ## How the Browser Handles the Click.
 So here is our link!
@@ -56,7 +57,7 @@ So here is our link!
 ```html
 <a href='#' class='expand'>Show comments</a>
 ```
-When an event occurs we get a thing called an event bubble. So the click event will start on our link of `.expand` and bubble up to each parent node in the markup to let them know a click event happened. Once our bubble has notified all of the parents then it follows the link `#` and goes directly to the top of the page which is the default behavior.
+When an event occurs we get a thing called an event bubble. So the click event will start on our link of `.expand` and bubble up to each parent node to let them know a click event happened. Once our bubble has notified all of the parents then it follows the link `#` and goes directly to the top of the page which is the default behavior.
 
 So we need to find a way to prevent the default browser behavior. The first step towards fixing this issue is to add the `event` object inside of our event handler paramater.
 
@@ -71,7 +72,7 @@ $(document).ready(function () {
     });
 });
 ```
-`stopPropagation` stops our little annoying bubble from going up to ancestors the DOM. So the `stopPropagination` method keeps our bubble contained.
+`stopPropagation` stops our little annoying bubble from going up to ancestors in the DOM. So the `stopPropagination` method keeps our bubble contained.
 
 However `stopPropagation` dose not stop the default behavior of the page jumping up so `stopPropagation` its not our solution.
 
@@ -88,3 +89,9 @@ $(document).ready(function () {
     });
 });
 ```
+
+So in this case our bubble is going to bubble up but when it reaches to the top of the node list which is our browser and **its not going to follow the default behavior!**  
+
+There will be no more popping up to the top of the web page and our code is all good! 
+
+# Exercises  
