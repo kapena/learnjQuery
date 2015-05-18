@@ -92,6 +92,118 @@ $(document).ready(function () {
 
 So in this case our bubble is going to bubble up but when it reaches to the top of the node list which is our browser and **its not going to follow the default behavior!**  
 
-There will be no more popping up to the top of the web page and our code is all good! 
+There will be no more popping up to the top of the web page and our code is all good!
 
-# Exercises  
+# Exercises
+Here is our HTML document for reference
+
+```html
+<div id="all-tours" class="links">
+    <h1>Guided Tours</h1>
+    <ul>
+    <li class="tour usa" data-discount="199">
+    <h2>New York, New York</h2>
+    <span class="details">$1,899 for 7 nights</span>
+    <button class="book">Book Now</button>
+    <a href="#" class="see-photos">See Photos</a>
+        <ul class="photos">
+            <li>
+                <img src="/assets/photos/paris1.jpg">
+                <span>Arc de Triomphe</span>
+            </li>
+            <li>
+                <img src="/assets/photos/paris2.jpg">
+                <span>The Eiffel Tower</span>
+            </li>
+            <li>
+                <img src="/assets/photos/paris3.jpg">
+                <span>Notre Dame de Paris</span>
+            </li>
+        </ul>
+    </li>
+    <li class="tour france" data-discount="99">
+        <h2>Paris, France</h2>
+        <span class="details">$1,499 for 5 nights</span>
+        <button class="book">Book Now</button>
+        <a href="#" class="see-photos">See Photos</a>
+        <ul class="photos">
+            <li>
+                <img src="/assets/photos/paris1.jpg">
+                <span>Arc de Triomphe</span>
+            </li>
+            <li>
+                <img src="/assets/photos/paris2.jpg">
+                <span>The Eiffel Tower</span>
+            </li>
+            <li>
+                <img src="/assets/photos/paris3.jpg">
+                <span>Notre Dame de Paris</span>
+            </li>
+        </ul>
+    </li>
+        <li class="tour uk" data-discount="149">
+            <h2>London, UK</h2>
+            <span class="details">$2,199 for 5 nights</span>
+            <button class="book">Book Now</button>
+            <a href="#" class="see-photos">See Photos</a>
+            <ul class="photos">
+            <li>
+                <img src="/assets/photos/paris1.jpg">
+                <span>Arc de Triomphe</span>
+            </li>
+            <li>
+                <img src="/assets/photos/paris2.jpg">
+                <span>The Eiffel Tower</span>
+            </li>
+            <li>
+                <img src="/assets/photos/paris3.jpg">
+                <span>Notre Dame de Paris</span>
+            </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+```
+
+## 4.18 Link Events 1
+Write an event handler that will target all links with a class of `.see-photos` on click.
+
+So we want to create an event handeler that targets every link that has a class of `.see-photos`
+
+Our event handeler is also going to have the click method
+
+```javascript
+$(document).ready(function(){
+    // Event handeler that will target all links
+    // with the class of .see-photos when clicked on
+    $('.see-photos').on('click',function(){
+        // once the link is clicked show the photos for the clicked tour
+    });
+});
+```
+## 4.19 Link Events 2
+When this link is clicked, show the photos for the clicked tour by traversing to it using `closest` and `find` then sliding it down by using `slideToggle`.
+
+### Solution
+Once our link of `<a href="#" class="see-photos">See Photos</a>` is **clicked**
+then we need to show the photos for the clicked tour.
+
+We achieve this by traversing the DOM. First off we need to use the `$(this)` object to reference our event handler. Then we can use the jQuery `closest` method to find the closest element to the images which would be our `li class` of `.photos`.
+
+Then we need to `find` the images and we achieve that by using our jQuery `find` method to find all the photos which live inside the `ul class` of `photos`.
+
+Lastly we need to call the `slideToggle` jQuery method which is going to slide the photos down when we click on our link.
+
+
+```javascript
+// 4.19
+$(document).ready(function(){
+    // Event handeler that will target all links
+    // with the class of .see-photos when clicked on
+    $('.see-photos').on('click',function(){
+        // once the link is clicked show the photos for the clicked tour
+        $(this).closest('.tour').find('.photos').slideToggle();
+    });
+});
+```
+# Event Parameter 1
