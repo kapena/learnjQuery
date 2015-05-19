@@ -149,7 +149,7 @@ We then chain on the `val()` method which allows us to get the exact value from 
 
 `$(this)` allows us to trigger our entire event handler.
 
-So heres our code in full. There are a few steps here that are quite importaint so try to understand how this works before you move on.
+There are a few steps here that are quite important so try to understand how this works before you move on.
 
 `$('#nights-count').text($(this).val());`
 
@@ -172,7 +172,7 @@ Set the content of the `#total` element to the number the traveler has entered i
 
 ## Steps To Solve
 
-First off we need to understand what we need to do.
+First off we need to understand what we need to do before we even lay hands on trying to write code. Write out the instructions in your own words and figure out a logical method to attack this problem.
 
 The question states clearly that we need to set the **content** of the `#total` element to the *number of nights the user wishes to stay and multiply these nights by the daily price*.
 
@@ -205,7 +205,7 @@ Now we need to access the data attribute that will contain the daily price rate.
 
 To do that we are going to need to use this code.
 
-`var dailyPrice = +$(this).closest('.tour').data('data-price');` remember in our notes above that `+` converts the string to a number. Well in our `data-price` attribute our price in in a string so we must remember to use `+` to convert strings to numbers!
+`var dailyPrice = +$(this).closest('.tour').data('data-price');` remember in our notes above that `+` converts the string to a number. If you take a close look in our `data-price` attribute our price in in a string so we must remember to use `+` to convert strings to numbers!
 
 Inside of `dailyPrice` we are accessing the closest element to `.tour` which is the `data-daily-price` attribute through the `data()` method.
 
@@ -216,22 +216,24 @@ Inside of `dailyPrice` we are accessing the closest element to `.tour` which is 
 Now for the second variable which will store the number of nights
 `var nights`
 
-To get the number of nights the user is staying we need to access the **value** of our form field which contains the number of nights that they are staying.
+To get the number of nights that the user is staying we need to access the **value** of our form field which contains the number of nights that they have entered inside of the form field.
 
-To perform that task we will need to use `+$(this)` and chain on `val()` method which will access the value of a form field
+---- Here
+
+To perform that task we will need to use `+$(this)` and then chain on the `val()` method which will access the value of a form field
 
 `var nights = +$(this).val();`
 
 ### Multiplication
-Now for our final step..We need to take all the values that we have collected and multiply them. To do this we are going to need to access our `#total` element then chain up the `text()` method which will take our two variables and multiply them.
+Now for our final step..We need to take all the values that we have collected and multiply them. To do this we are going to need to access our `#total` element then chain on `text()` method which will take our two variables and multiply them.
 
 `$('#total').text(dailyPrice * nights);`
 
 ## 4.16 Another Event Handler
-Let's write another event handler for the form field that will be run when the focus event is triggered. When this occurs, set the number of nights to 7.
+Let's write another event handler for the form field that will run when the `focus` event is triggered. When this occurs, set the number of nights to 7.
 
 ### Steps To Solve
-First off we need a whole new event handler for our form field. Now we want our event handler to only run when the `focus` event is fired. Once the focus event is fired we will need to set the number of digits to 7.
+First off we need a whole new event handler for our form field. Once we have created our new event handeler we want it only run when the `focus` event is fired. Once the focus event is fired we will need to set the number of digits to 7.
 
 Start out with the first task. Create a new event handler.
 
