@@ -206,4 +206,59 @@ $(document).ready(function(){
     });
 });
 ```
-# Event Parameter 1
+## Event Parameter 1
+Change your event handler method to take in a link event and prevent the other event handler from being called.
+
+### Solution
+So if we remember in our video notes this requires us to add the `event` parameter to our existing event handler.
+
+Once we have added the `event` paramater then we must add the jQuery method of `stopPagination()` to our `event` parameter.
+
+`stopPagination()` will prevent the our parent event handler from being notified that the second event handler exists.
+
+```javascript
+$(document).ready(function(){
+    // adding a link event parameter
+    $('.see-photos').on('click',function(event){
+        // stopPropagination prevents any parent handlers from being
+        // notified of the event
+        event.stopPropagination();
+        // once the link is clicked show the photos for the clicked tour
+        $(this).closest('.tour').find('.photos').slideToggle();
+    });
+
+    // this event should be silenced forever more!
+    $('.tour').on('click',function(){
+        alert('this must not be called!!');
+    });
+});
+```
+
+## Event Parameter 2
+Let's change this so that the browser doesn't jump to the top of the page when the link is clicked as well.
+
+### Solution
+So what happens when we click on our link?! Well..Our page just jumps to the top of our browser. That's not what we want.
+
+To fix this issue we need to add the `preventDefault()` method to the `event` object.
+
+Don't remove `stopPropagation()` because this method is preventing our second event handler from being fired! If you go and remove it then the second event will fire and you will recieve an alert message every time you hit a link. 
+
+`event.preventDefault` **prevents the default action of the event** which stops our page from popping up to the top.
+
+```javascript
+// 4.21
+$(document).ready(function(){
+    $('.see-photos').on('click',function(event){
+        // preventDefault fixes our page jumping issue
+        event.preventDefault();
+        // stopPropagation stops our second event from being fired.
+        event.stopPropagation();
+        $(this).closest('.tour').find('.photos').slideToggle();
+    });
+    // this event not being fired
+    $('.tour').on('click',function(event){
+        alert('This should not be called!');
+    });
+});
+```
