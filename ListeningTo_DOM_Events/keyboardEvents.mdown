@@ -193,6 +193,7 @@ $(document).ready(function(){
     });
 });
 ```
+**Steps continue**
 
 ### First Variable
 
@@ -222,7 +223,7 @@ To perform that task we will need to use `+$(this)` and chain on `val()` method 
 `var nights = +$(this).val();`
 
 ### Multiplication
-Now for our final step..We need to take the values that we have collected and multiply them. To do this we are going to need to access our `#total` element then chain the `text()` method which will take our two variables and multiply them.
+Now for our final step..We need to take all the values that we have collected and multiply them. To do this we are going to need to access our `#total` element then chain up the `text()` method which will take our two variables and multiply them.
 
 `$('#total').text(dailyPrice * nights);`
 
@@ -230,7 +231,7 @@ Now for our final step..We need to take the values that we have collected and mu
 Let's write another event handler for the form field that will be run when the focus event is triggered. When this occurs, set the number of nights to 7.
 
 ### Steps To Solve
-First off we need a whole new event handler for our form field. Our event handler only run when the `focus` event is fired. Once the focus event is fired we will need to set the number of digits to 7.
+First off we need a whole new event handler for our form field. Now we want our event handler to only run when the `focus` event is fired. Once the focus event is fired we will need to set the number of digits to 7.
 
 Start out with the first task. Create a new event handler.
 
