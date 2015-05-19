@@ -137,7 +137,9 @@ $(document).ready(function() {
 ## 4.14 Keyup Event Handler I
 Within our event handler, update the number of nights in the `#nights-count` element to whatever the traveler entered in the `#nights` form field.
 
-Inside our event handeler we are to accessing the `#nights-count` `id` like so `$('#nights-count')`
+## Steps To Solve
+
+Inside our event handeler we are accessing the `#nights-count` `id` like so `$('#nights-count')`
 
 Then we are chaining the jQuery text method onto `#nights-count` like this `$('#nights-count').text()` which allows us to access the text contents of `#nights-count`
 
@@ -167,6 +169,8 @@ $(document).ready(function() {
 ## 4.15 Keyup Event Handler II
 
 Set the content of the `#total` element to the number the traveler has entered into the form field multiplied by the daily price.
+
+## Steps To Solve
 
 First off we need to understand what we need to do.
 
@@ -225,7 +229,7 @@ Now for our final step..We need to take the values that we have collected and mu
 ## 4.16 Another Event Handler
 Let's write another event handler for the form field that will be run when the focus event is triggered. When this occurs, set the number of nights to 7.
 
-### Steps to solve
+### Steps To Solve
 First off we need a whole new event handler for our form field. Our event handler only run when the `focus` event is fired. Once the focus event is fired we will need to set the number of digits to 7.
 
 Start out with the first task. Create a new event handler.
